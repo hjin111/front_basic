@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 직렬화 및 역직렬화 실습</title>
+</head>
+<body>
+        <table border="1" style="border-collapse: collapse; margin: auto; text-align: center; place-content: center;">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td id="name"></td>
+                <td id="age"></td>
+                <td id="score"></td>
+            </tr>
+        </table><br>
+        <table border="1" style="border-collapse: collapse; margin: auto;text-align: center; place-content: center;" id="t">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>age</th>
+                    <th>score</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+
+            </tbody>
+            
+        </table>
+    
+    <script>
+        // 단일 객체
+        const jsonTxt1 = '{"name":"Alice","age":25,"score":85}';
+        // 객체 배열
+        const jsonTxt2 = '[{"name":"Alice","age":25,"score":85},{"name":"Bob","age":28,"score":92},{"name":"Charlie","age":32,"score":88}]';
+        // json 역직렬화(파싱)
+        const obj1 = JSON.parse(jsonTxt1);
+        console.log(obj1);
+        document.getElementById("name").innerHTML = obj1.name;
+        document.getElementById("age").innerHTML = obj1.age;
+        document.getElementById("score").innerHTML = obj1.score;
+
+        const obj2 = JSON.parse(jsonTxt2);
+        console.log(obj2);
+        // let table = document.getElementById("t");
+        // for(let i = 0; i < obj2.length; i++){
+        //     table.innerHTML += "<tr><td>" + obj2[i].name + "</td><td>" + obj2[i].age + "</td><td>" + obj2[i].score + " </td></tr>";
+            
+        // }
+
+        let tbodyData = document.getElementById("data");
+        obj2.forEach(a => {
+            tbodyData.innerHTML += `<tr><td>${a.name}</td><td>${a.age}</td><td>${a.score}</td></tr>` ;
+        });
+
+        // json 직렬화
+        const jsonTxt3 = JSON.stringify(obj2);
+        console.log(jsonTxt3);
+        console.log(obj2);
+        
+    </script>
+</body>
+</html>
