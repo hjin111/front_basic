@@ -8,10 +8,10 @@
     
 </head>
 <body>
-   <object style="width:100%;" data="header.html" type="text/html"></object>
+   <object style="width:100%;" data="../common/header.html" type="text/html"></object>
    <div class="container">
         <div class="page-header"><h3>글쓰기</h3></div>
-        <form action="http://localhost:8081/post/register2" method="post" enctype="application/x-www-form-urlencoded">
+        <form id="postForm">
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" name="title" id="title">
@@ -23,6 +23,25 @@
             <button type="submit" id ="mybutton"class="btn btn-secondary">제출</button>
         </form> 
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById("postForm").addEventListener('submit', 
+            async function(event){
+                event.preventDefault();
+                const title = document.getElementById("title").value;
+                const contents = document.getElementById("contents").value;
+
+                try{
+                    // json으로 만들거니깐 
+                    const response = await axios.post('http://43.202.51.4:8081/post/register1', {title:title, contents:contents})
+                    console.log(response.data);
+                }catch(e){
+                    console.log(e);
+                }
+        
+            }
+        )
+    </script>
 
 </body>
 </html>

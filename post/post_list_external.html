@@ -19,7 +19,7 @@
         </div>
         <table class="table">
             <thead>
-                <tr><th>id</th><th>title</th><th>contents</th></tr>
+                <tr><th>userId</th><th>id</th><th>title</th><th>body</th></tr>
             </thead>
             <tbody id="bodyData">
                
@@ -30,14 +30,15 @@
     <script>
         async function serverData(){
             const response1 = await axios.
-            get("http://43.202.51.4:8081/post/list");
+            get("https://jsonplaceholder.typicode.com/posts/");
             const allData = response1.data;
             let bodyData = document.getElementById("bodyData");
             for(let i = 0; i < allData.length; i++){
-            const id = allData[i].id;
-            const title = allData[i].title;
-            const contents = allData[i].contents;
-            bodyData.innerHTML += `<tr><td>${id}</td><td>${title}</td><td>${contents}</td></tr>`;
+            let userId = allData[i].userId;
+            let id = allData[i].id;
+            let title = allData[i].title;
+            let body = allData[i].body;
+            bodyData.innerHTML += `<tr><td>${userId}</td><td>${id}</td><td>${title}</td><td>${body}</td></tr>`;
             }
         };
         serverData();
